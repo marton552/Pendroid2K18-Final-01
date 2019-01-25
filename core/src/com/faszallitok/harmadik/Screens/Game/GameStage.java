@@ -17,6 +17,7 @@ import java.util.ArrayList;
 
 public class GameStage extends MyStage {
     private ArrayList<Road> roads = new ArrayList<Road>();
+    private int SPEED = 5;
 
     public GameStage(Batch batch, MyGdxGame game) {
         super(new ExtendViewport(576, 1024, new OrthographicCamera(576, 1024)), batch, game);
@@ -53,19 +54,24 @@ public class GameStage extends MyStage {
         return new RoadStraight();
     }
 
+    private int tick = 0;
+
     @Override
     public void act(float delta) {
         super.act(delta);
-        getCamera().position.y += 5;
+        getCamera().position.y += SPEED;
         for (int i = 0; i < roads.size(); i++) {
             if(roads.get(i).getY() + roads.get(i).getHeight()+getViewport().getWorldHeight() <= getCamera().position.y){
-                System.out.println("Kint van. ("+i+")");
+                //System.out.println("Kint van. ("+i+")");
                 getActors().removeValue(roads.get(i), false);
                 roads.set(i, null);
                 roads.remove(i);
                 addRoad();
             }
         }
+
+        tick++;
+        if(tick > 100) { SPEED++; tick = 0;}
     }
 
     @Override
