@@ -1,5 +1,7 @@
 package com.faszallitok.harmadik.Screens.Game;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
@@ -47,6 +49,7 @@ public class GameStage extends MyStage {
 
     Road getRandomRoad() {
         int randNum = randomInt(1, 4); //3 típusú út.
+        //randNum = 3;
         if(randNum == 1)        return new RoadStraight();
         else if (randNum == 2)  return new RoadCross();
         else if (randNum == 3)  return new RoadCircle();
@@ -71,7 +74,19 @@ public class GameStage extends MyStage {
         }
 
         tick++;
-        if(tick > 100) { SPEED++; tick = 0;}
+        //if(tick > 100) { SPEED++; tick = 0;}
+        if(Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
+            getCamera().position.y -= 5;
+        }
+        if(Gdx.input.isKeyPressed(Input.Keys.UP)) {
+            getCamera().position.y += 5;
+        }
+        if(Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
+            getCamera().position.x += 5;
+        }
+        if(Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
+            getCamera().position.x -= 5;
+        }
     }
 
     @Override

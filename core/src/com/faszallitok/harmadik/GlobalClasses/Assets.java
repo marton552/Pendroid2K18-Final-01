@@ -47,9 +47,9 @@ public class Assets {
 	public static final AssetDescriptor<Texture> MENU_ICON = new AssetDescriptor<Texture>("menu-icon.png", Texture.class);
 
 	//Roads
-	public static final AssetDescriptor<Texture> ROAD_STRAIGHT = new AssetDescriptor<Texture>("roads/egyenes.png", Texture.class);
-	public static final AssetDescriptor<Texture> ROAD_CROSS = new AssetDescriptor<Texture>("roads/kereszt.png", Texture.class);
-	public static final AssetDescriptor<Texture> ROAD_CIRCLE = new AssetDescriptor<Texture>("roads/kor.png", Texture.class);
+	public static final AssetDescriptor<Texture> ROAD_STRAIGHT = new AssetDescriptor<Texture>("roads/straight.png", Texture.class);
+	public static final AssetDescriptor<Texture> ROAD_CROSS = new AssetDescriptor<Texture>("roads/cross.png", Texture.class);
+	public static final AssetDescriptor<Texture> ROAD_CIRCLE = new AssetDescriptor<Texture>("roads/circle.png", Texture.class);
 
 
 	//Button
