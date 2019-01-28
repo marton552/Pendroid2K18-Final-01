@@ -2,7 +2,9 @@ package com.faszallitok.harmadik.Screens.Game;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.assets.AssetDescriptor;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
@@ -10,20 +12,26 @@ import com.badlogic.gdx.scenes.scene2d.utils.DragListener;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.faszallitok.harmadik.GlobalClasses.Assets;
+import com.faszallitok.harmadik.MyBaseClasses.Scene2D.MyRectangle;
 import com.faszallitok.harmadik.MyBaseClasses.Scene2D.MyStage;
 import com.faszallitok.harmadik.MyBaseClasses.Scene2D.OneSpriteStaticActor;
 import com.faszallitok.harmadik.MyGdxGame;
 import com.faszallitok.harmadik.Screens.Game.Roads.Road;
 import com.faszallitok.harmadik.Screens.Game.Roads.RoadCircle;
 import com.faszallitok.harmadik.Screens.Game.Roads.RoadCross;
+import com.faszallitok.harmadik.Screens.Game.Roads.RoadLeft;
+import com.faszallitok.harmadik.Screens.Game.Roads.RoadRight;
 import com.faszallitok.harmadik.Screens.Game.Roads.RoadStraight;
+import com.faszallitok.harmadik.Screens.Menu.MenuScreen;
 
 import java.util.ArrayList;
 
 public class GameStage extends MyStage {
     private ArrayList<Road> roads = new ArrayList<Road>();
-    private int SPEED = 5;
-    private OneSpriteStaticActor car;
+    private int SPEED = 7;
+    private Player car;
+
+    private float pDirX = 0;
 
     public GameStage(Batch batch, MyGdxGame game) {
         super(new ExtendViewport(576, 1024, new OrthographicCamera(576, 1024)), batch, game);
@@ -32,22 +40,27 @@ public class GameStage extends MyStage {
             addRoad();
         }
 
-        car = new OneSpriteStaticActor(Assets.manager.get(Assets.CAR));
-        car.setSize(car.getWidth() / 4, car.getHeight() / 4);
+        car = new Player(Assets.manager.get(Assets.CAR_13));
+        car.setSize(car.getWidth() / 3, car.getHeight() / 3);
         car.setPosition(getViewport().getWorldWidth() / 2 - car.getWidth() / 2, 100);
-        car.setDebug(true);
-        car.addListener(new ClickListener() {
+        pDirX = car.getX();
+        car.addCollisionShape("player", new MyRectangle(car.getWidth() - 60, car.getHeight() - 60, 30, 30));
+        addActor(car);
+
+
+        addListener(new ClickListener() {
             @Override
             public void touchDragged(InputEvent event, float x, float y, int pointer) {
                 super.touchDragged(event, x, y, pointer);
-                car.setX(x);
+                //car.setX(x - car.getWidth() / 2);
+                pDirX = x - car.getWidth() / 2;
             }
         });
-        addActor(car);
+
 
     }
 
-    int randomInt(int min, int max) {
+    static int randomInt(int min, int max) {
         return (int)Math.floor(Math.random() * (max - min) ) + min;
     }
 
@@ -57,6 +70,8 @@ public class GameStage extends MyStage {
         Road road = getRandomRoad();
         road.setSize(road.getWidth() / 1.5f, road.getHeight() / 1.5f);
         road.setPosition(getViewport().getWorldWidth() / 2 - road.getWidth() / 2, lastY);
+        //if(road instanceof RoadStraight) {}
+        //else addActor(road);
         addActor(road);
         roads.add(road);
 
@@ -64,27 +79,41 @@ public class GameStage extends MyStage {
     }
 
     Road getRandomRoad() {
-        int randNum = randomInt(1, 4); //3 típusú út.
-        if(randNum == 1)        return new RoadStraight();
+        int randNum = randomInt(1, 6); //3 típusú út.
+        randNum = 1;
+        if(randNum == 1)        return new RoadStraight(this);
         else if (randNum == 2)  return new RoadCross();
         else if (randNum == 3)  return new RoadCircle();
+        else if (randNum == 4)  return new RoadLeft();
+        else if (randNum == 5)  return new RoadRight();
 
-        return new RoadStraight();
+
+        return new RoadStraight(this);
     }
+
+    public static AssetDescriptor<Texture> getRandomCarSkin() {
+        AssetDescriptor<Texture>[] skins = new AssetDescriptor[]{Assets.CAR_1, Assets.CAR_2, Assets.CAR_3, Assets.CAR_4, Assets.CAR_5, Assets.CAR_6,
+                                                                Assets.CAR_7, Assets.CAR_8, Assets.CAR_9, Assets.CAR_10, Assets.CAR_11, Assets.CAR_12, Assets.CAR_13};
+        return skins[GameStage.randomInt(0, skins.length)];
+    }
+
 
     private int tick = 0;
 
     @Override
     public void act(float delta) {
         super.act(delta);
-        //car.act(delta);
-
-        //getCamera().position.y += SPEED;
         car.setY(car.getY() + SPEED);
         getCamera().position.y = car.getY() + 300;
+
+        if(car.getX() != pDirX)
+        car.setX(car.getX() - (car.getX() - pDirX) / 7);
+
+        if(car.getX() + car.getWidth() / 2 - getViewport().getWorldWidth() / 2 > roads.get(0).getX() && car.getX() + car.getWidth() / 2 + getViewport().getWorldWidth() / 2 < roads.get(0).getX() + roads.get(0).getWidth())
+            getCamera().position.x = car.getX() + car.getWidth() / 2;
+
         for (int i = 0; i < roads.size(); i++) {
             if(roads.get(i).getY() + roads.get(i).getHeight()+getViewport().getWorldHeight() <= getCamera().position.y){
-                //System.out.println("Kint van. ("+i+")");
                 getActors().removeValue(roads.get(i), false);
                 roads.set(i, null);
                 roads.remove(i);
@@ -93,7 +122,7 @@ public class GameStage extends MyStage {
         }
 
         tick++;
-        //if(tick > 100) { SPEED++; tick = 0;}
+        if(tick > 500) { SPEED++; tick = 0;}
         if(Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
             getCamera().position.y -= 5;
         }
@@ -106,6 +135,21 @@ public class GameStage extends MyStage {
         if(Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
             getCamera().position.x -= 5;
         }
+
+        if(Gdx.input.isKeyPressed(Input.Keys.SPACE)) {
+            SPEED = 10;
+        }//else SPEED = 0;
+
+
+        for (int i = 0; i < roads.size(); i++) {
+            if(car.overlaps(roads.get(i))) {
+                gameOver();
+            }
+        }
+    }
+
+    private void gameOver() {
+        game.setScreen(new MenuScreen(game));
     }
 
     @Override

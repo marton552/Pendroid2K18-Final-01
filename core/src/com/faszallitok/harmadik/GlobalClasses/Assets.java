@@ -50,10 +50,23 @@ public class Assets {
 	public static final AssetDescriptor<Texture> ROAD_STRAIGHT = new AssetDescriptor<Texture>("roads/straight.png", Texture.class);
 	public static final AssetDescriptor<Texture> ROAD_CROSS = new AssetDescriptor<Texture>("roads/cross.png", Texture.class);
 	public static final AssetDescriptor<Texture> ROAD_CIRCLE = new AssetDescriptor<Texture>("roads/circle.png", Texture.class);
+	public static final AssetDescriptor<Texture> ROAD_LEFT = new AssetDescriptor<Texture>("roads/left.png", Texture.class);
+	public static final AssetDescriptor<Texture> ROAD_RIGHT = new AssetDescriptor<Texture>("roads/right.png", Texture.class);
 
 	//Car
-	public static final AssetDescriptor<Texture> CAR = new AssetDescriptor<Texture>("car.png", Texture.class);
-
+	public static final AssetDescriptor<Texture> CAR_1 = new AssetDescriptor<Texture>("cars/car1.png", Texture.class);
+	public static final AssetDescriptor<Texture> CAR_2 = new AssetDescriptor<Texture>("cars/car2.png", Texture.class);
+	public static final AssetDescriptor<Texture> CAR_3 = new AssetDescriptor<Texture>("cars/car3.png", Texture.class);
+	public static final AssetDescriptor<Texture> CAR_4 = new AssetDescriptor<Texture>("cars/car4.png", Texture.class);
+	public static final AssetDescriptor<Texture> CAR_5 = new AssetDescriptor<Texture>("cars/car5.png", Texture.class);
+	public static final AssetDescriptor<Texture> CAR_6 = new AssetDescriptor<Texture>("cars/car6.png", Texture.class);
+	public static final AssetDescriptor<Texture> CAR_7 = new AssetDescriptor<Texture>("cars/car7.png", Texture.class);
+	public static final AssetDescriptor<Texture> CAR_8 = new AssetDescriptor<Texture>("cars/car8.png", Texture.class);
+	public static final AssetDescriptor<Texture> CAR_9 = new AssetDescriptor<Texture>("cars/car9.png", Texture.class);
+	public static final AssetDescriptor<Texture> CAR_10 = new AssetDescriptor<Texture>("cars/car10.png", Texture.class);
+	public static final AssetDescriptor<Texture> CAR_11 = new AssetDescriptor<Texture>("cars/car11.png", Texture.class);
+	public static final AssetDescriptor<Texture> CAR_12 = new AssetDescriptor<Texture>("cars/car12.png", Texture.class);
+	public static final AssetDescriptor<Texture> CAR_13 = new AssetDescriptor<Texture>("cars/car13.png", Texture.class);
 
 	//Button
 	public static final AssetDescriptor<Texture> BTN_BACK = new AssetDescriptor<Texture>("ui_textures/btn_back.png", Texture.class);
@@ -91,8 +104,22 @@ public class Assets {
 		manager.load(ROAD_STRAIGHT);
 		manager.load(ROAD_CROSS);
 		manager.load(ROAD_CIRCLE);
+		manager.load(ROAD_LEFT);
+		manager.load(ROAD_RIGHT);
 
-		manager.load(CAR);
+		manager.load(CAR_1);
+		manager.load(CAR_2);
+		manager.load(CAR_3);
+		manager.load(CAR_4);
+		manager.load(CAR_5);
+		manager.load(CAR_6);
+		manager.load(CAR_7);
+		manager.load(CAR_8);
+		manager.load(CAR_9);
+		manager.load(CAR_10);
+		manager.load(CAR_11);
+		manager.load(CAR_12);
+		manager.load(CAR_13);
 
 		manager.load(MENU_ICON);
 		manager.load(BTN_BACK);

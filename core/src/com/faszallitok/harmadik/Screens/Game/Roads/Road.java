@@ -6,6 +6,6 @@ import com.faszallitok.harmadik.MyBaseClasses.Scene2D.OneSpriteStaticActor;
 public class Road extends OneSpriteStaticActor {
     public Road(Texture texture) {
         super(texture);
-        //setDebug(true);
+        setDebug(true);
     }
 }
