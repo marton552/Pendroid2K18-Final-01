@@ -20,9 +20,12 @@ public class GameScreen extends MyScreen {
         gameStage = new GameStage(spriteBatch, game);
 
         InputMultiplexer multiplexer = new InputMultiplexer();
+
         multiplexer.addProcessor(gameMenu);
         multiplexer.addProcessor(gameHud);
+
         multiplexer.addProcessor(gameStage);
+
 
         Gdx.input.setInputProcessor(multiplexer);
     }

@@ -4,6 +4,9 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.scenes.scene2d.utils.DragListener;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.faszallitok.harmadik.GlobalClasses.Assets;
@@ -20,6 +23,7 @@ import java.util.ArrayList;
 public class GameStage extends MyStage {
     private ArrayList<Road> roads = new ArrayList<Road>();
     private int SPEED = 5;
+    private OneSpriteStaticActor car;
 
     public GameStage(Batch batch, MyGdxGame game) {
         super(new ExtendViewport(576, 1024, new OrthographicCamera(576, 1024)), batch, game);
@@ -28,6 +32,18 @@ public class GameStage extends MyStage {
             addRoad();
         }
 
+        car = new OneSpriteStaticActor(Assets.manager.get(Assets.CAR));
+        car.setSize(car.getWidth() / 4, car.getHeight() / 4);
+        car.setPosition(getViewport().getWorldWidth() / 2 - car.getWidth() / 2, 100);
+        car.setDebug(true);
+        car.addListener(new ClickListener() {
+            @Override
+            public void touchDragged(InputEvent event, float x, float y, int pointer) {
+                super.touchDragged(event, x, y, pointer);
+                car.setX(x);
+            }
+        });
+        addActor(car);
 
     }
 
@@ -49,7 +65,6 @@ public class GameStage extends MyStage {
 
     Road getRandomRoad() {
         int randNum = randomInt(1, 4); //3 típusú út.
-        //randNum = 3;
         if(randNum == 1)        return new RoadStraight();
         else if (randNum == 2)  return new RoadCross();
         else if (randNum == 3)  return new RoadCircle();
@@ -62,7 +77,11 @@ public class GameStage extends MyStage {
     @Override
     public void act(float delta) {
         super.act(delta);
-        getCamera().position.y += SPEED;
+        //car.act(delta);
+
+        //getCamera().position.y += SPEED;
+        car.setY(car.getY() + SPEED);
+        getCamera().position.y = car.getY() + 300;
         for (int i = 0; i < roads.size(); i++) {
             if(roads.get(i).getY() + roads.get(i).getHeight()+getViewport().getWorldHeight() <= getCamera().position.y){
                 //System.out.println("Kint van. ("+i+")");
@@ -87,6 +106,16 @@ public class GameStage extends MyStage {
         if(Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
             getCamera().position.x -= 5;
         }
+    }
+
+    @Override
+    public void draw() {
+        super.draw();
+
+        getBatch().setProjectionMatrix(getCamera().combined);
+        getBatch().begin();
+        car.draw(getBatch(), 1);
+        getBatch().end();
     }
 
     @Override

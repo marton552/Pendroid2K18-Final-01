@@ -51,6 +51,9 @@ public class Assets {
 	public static final AssetDescriptor<Texture> ROAD_CROSS = new AssetDescriptor<Texture>("roads/cross.png", Texture.class);
 	public static final AssetDescriptor<Texture> ROAD_CIRCLE = new AssetDescriptor<Texture>("roads/circle.png", Texture.class);
 
+	//Car
+	public static final AssetDescriptor<Texture> CAR = new AssetDescriptor<Texture>("car.png", Texture.class);
+
 
 	//Button
 	public static final AssetDescriptor<Texture> BTN_BACK = new AssetDescriptor<Texture>("ui_textures/btn_back.png", Texture.class);
@@ -88,6 +91,8 @@ public class Assets {
 		manager.load(ROAD_STRAIGHT);
 		manager.load(ROAD_CROSS);
 		manager.load(ROAD_CIRCLE);
+
+		manager.load(CAR);
 
 		manager.load(MENU_ICON);
 		manager.load(BTN_BACK);
