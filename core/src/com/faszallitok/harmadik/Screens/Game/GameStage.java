@@ -81,14 +81,14 @@ public class GameStage extends MyStage {
     Road getRandomRoad() {
         int randNum = randomInt(1, 6); //3 típusú út.
         randNum = 1;
-        if(randNum == 1)        return new RoadStraight(this);
+        if(randNum == 1)        return new RoadStraight();
         else if (randNum == 2)  return new RoadCross();
         else if (randNum == 3)  return new RoadCircle();
         else if (randNum == 4)  return new RoadLeft();
         else if (randNum == 5)  return new RoadRight();
 
 
-        return new RoadStraight(this);
+        return new RoadStraight();
     }
 
     public static AssetDescriptor<Texture> getRandomCarSkin() {

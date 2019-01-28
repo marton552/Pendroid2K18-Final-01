@@ -14,11 +14,8 @@ import java.util.Random;
 public class RoadStraight extends Road {
 
     public ArrayList<OneSpriteStaticActor> obstacles = new ArrayList<OneSpriteStaticActor>();
-    GameStage stage;
-    public RoadStraight(GameStage stage) {
+    public RoadStraight() {
         super(Assets.manager.get(Assets.ROAD_STRAIGHT));
-        this.stage = stage;
-
         addCollisionShape("bal", new MyRectangle(60, getHeight(), 190, 0));
         addCollisionShape("jobb", new MyRectangle(60, getHeight(), 825, 0));
 
@@ -54,7 +51,7 @@ public class RoadStraight extends Road {
     public void draw(Batch batch, float parentAlpha) {
         super.draw(batch, parentAlpha);
 
-        batch.setProjectionMatrix(getStage().getCamera().combined);
+        //batch.setProjectionMatrix(getStage().getCamera().combined);
         //batch.begin();
         for(int i = 0; i < obstacles.size(); i++) obstacles.get(i).draw(batch, 1);
         //batch.end();
