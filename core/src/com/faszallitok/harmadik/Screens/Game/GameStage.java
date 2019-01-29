@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.DragListener;
+import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.faszallitok.harmadik.GlobalClasses.Assets;
@@ -16,6 +17,8 @@ import com.faszallitok.harmadik.MyBaseClasses.Scene2D.MyRectangle;
 import com.faszallitok.harmadik.MyBaseClasses.Scene2D.MyStage;
 import com.faszallitok.harmadik.MyBaseClasses.Scene2D.OneSpriteStaticActor;
 import com.faszallitok.harmadik.MyGdxGame;
+import com.faszallitok.harmadik.Screens.End.EndScreen;
+import com.faszallitok.harmadik.Screens.End.EndStage;
 import com.faszallitok.harmadik.Screens.Game.Roads.Road;
 import com.faszallitok.harmadik.Screens.Game.Roads.RoadCircle;
 import com.faszallitok.harmadik.Screens.Game.Roads.RoadCross;
@@ -30,11 +33,16 @@ public class GameStage extends MyStage {
     private ArrayList<Road> roads = new ArrayList<Road>();
     private int SPEED = 7;
     private Player car;
+    public int SCORE = 0;
 
     private float pDirX = 0;
+    private long startTimer = System.currentTimeMillis();
 
-    public GameStage(Batch batch, MyGdxGame game) {
+    private GameScreen screen;
+
+    public GameStage(Batch batch, MyGdxGame game, GameScreen screen) {
         super(new ExtendViewport(576, 1024, new OrthographicCamera(576, 1024)), batch, game);
+        this.screen = screen;
 
         for(int i = 0; i < 3; i++) {
             addRoad();
@@ -80,7 +88,7 @@ public class GameStage extends MyStage {
 
     Road getRandomRoad() {
         int randNum = randomInt(1, 6); //3 típusú út.
-        randNum = 1;
+        //randNum = 1;
         if(randNum == 1)        return new RoadStraight();
         else if (randNum == 2)  return new RoadCross();
         else if (randNum == 3)  return new RoadCircle();
@@ -121,6 +129,12 @@ public class GameStage extends MyStage {
             }
         }
 
+        if(startTimer + 1000 < System.currentTimeMillis()) {
+            SCORE++;
+            startTimer = System.currentTimeMillis();
+            screen.gameHud.updateGameHud(SCORE);
+        }
+
         tick++;
         if(tick > 500) { SPEED++; tick = 0;}
         if(Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
@@ -149,7 +163,7 @@ public class GameStage extends MyStage {
     }
 
     private void gameOver() {
-        game.setScreen(new MenuScreen(game));
+        game.setScreen(new EndScreen(game, SCORE));
     }
 
     @Override

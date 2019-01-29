@@ -7,7 +7,7 @@ import com.faszallitok.harmadik.MyBaseClasses.Scene2D.OneSpriteStaticActor;
 public class Player extends OneSpriteStaticActor {
     public Player(Texture texture) {
         super(texture);
-        setDebug(true);
+        //setDebug(true);
     }
 
 }

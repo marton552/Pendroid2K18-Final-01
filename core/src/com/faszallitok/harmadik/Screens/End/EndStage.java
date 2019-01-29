@@ -16,29 +16,25 @@ import com.faszallitok.harmadik.MyGdxGame;
 import com.faszallitok.harmadik.Screens.Menu.MenuScreen;
 
 public class EndStage extends MyStage {
-    public EndStage(Batch batch, final MyGdxGame game, int death_type, int dealt_damage, int ellapsed_secs, int missed_strikes) {
+    public EndStage(Batch batch, final MyGdxGame game, int score) {
         super(new ExtendViewport(576, 1024, new OrthographicCamera(576, 1024)), batch, game);
 
-        OneSpriteStaticActor dark = new OneSpriteStaticActor(Assets.manager.get(Assets.DARK));
-        dark.setSize(getViewport().getWorldWidth() - 400, getViewport().getWorldHeight());
-        dark.setPosition(getViewport().getWorldWidth() / 2 - dark.getWidth() / 2, 0);
-        addActor(dark);
+        OneSpriteStaticActor bg = new OneSpriteStaticActor(Assets.manager.get(Assets.MENU_BG));
+        bg.setSize(getViewport().getWorldWidth(), getViewport().getWorldHeight());
+        addActor(bg);
 
-        String typeTxt = "Éhen Haltál";
-        if(death_type == 1) typeTxt = "Lecsaptak";
-
-        MyLabel title = new MyLabel(typeTxt, game.getLabelStyle());
-        title.getStyle().fontColor = Color.YELLOW;
-        title.setPosition(getViewport().getWorldWidth() / 2 - title.getWidth() / 2, getViewport().getWorldHeight() - title.getHeight() - 30);
+        MyLabel title = new MyLabel("Ütköztél!", game.getLabelStyle());
+        title.getStyle().fontColor = Color.WHITE;
+        title.setPosition(getViewport().getWorldWidth() / 2 - title.getWidth() / 2, getViewport().getWorldHeight() - title.getHeight() - 100);
         title.setAlignment(Align.center);
         title.setFontScale(2f);
         addActor(title);
 
-        MyLabel txt = new MyLabel("Okozott sérülések: "+dealt_damage+" db\nTúlélt idő: "+ellapsed_secs+" mp\nKikerült leütések: "+missed_strikes+" db", game.getLabelStyle());
+        MyLabel txt = new MyLabel("Szerezett pontok száma: "+score, game.getLabelStyle());
         txt.setFontScale(0.8f);
         txt.setAlignment(Align.center);
-        txt.setPosition(getViewport().getWorldWidth() / 2 - txt.getWidth() / 2, getViewport().getWorldHeight() / 2 - txt.getHeight() / 2 - 20);
-        txt.setColor(Color.YELLOW);
+        txt.setPosition(getViewport().getWorldWidth() / 2 - txt.getWidth() / 2, getViewport().getWorldHeight() / 2 - txt.getHeight() / 2 + 50);
+        txt.setColor(Color.WHITE);
         addActor(txt);
 
         MyButton back = new MyButton("Menü", game.getButtonStyle());

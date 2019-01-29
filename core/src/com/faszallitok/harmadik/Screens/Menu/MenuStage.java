@@ -20,13 +20,27 @@ public class MenuStage extends MyStage {
     private MyButton about;
     private MyButton quit;
 
+    private OneSpriteStaticActor martin;
+    private float martinStartX = 0;
+
     public MenuStage(Batch batch, MyGdxGame game) {
         super(new ExtendViewport(576, 1024, new OrthographicCamera(576, 1024)), batch, game);
 
         float w = getViewport().getWorldWidth();
+        float h = getViewport().getWorldHeight();
+
+        OneSpriteStaticActor bg = new OneSpriteStaticActor(Assets.manager.get(Assets.MENU_BG));
+        bg.setSize(w, h);
+        addActor(bg);
+
+        martin = new OneSpriteStaticActor(Assets.manager.get(Assets.MARTIN));
+        martin.setSize(martin.getWidth() / 1.8f, martin.getHeight() / 1.8f);
+        martinStartX = w - martin.getWidth() / 2 - 130;
+        martin.setPosition(martinStartX,0);
+        addActor(martin);
 
         play = new MyButton("Játék", game.getButtonStyle());
-        play.setPosition(getViewport().getWorldWidth() / 2 - play.getWidth() / 2, 400);
+        play.setPosition(w / 2 - play.getWidth() / 2, 400);
         play.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -57,6 +71,21 @@ public class MenuStage extends MyStage {
             }
         });
         addActor(quit);
+    }
+
+    private int animSpeed = 0;
+    private float tick = 3;
+
+    @Override
+    public void act(float delta) {
+        super.act(delta);
+        animSpeed++;
+        tick += 0.01;
+        //if(tick > 2) tick = 0;
+        //System.out.println(Math.cos(tick));
+
+        //if(Math.cos(tick) < 0.4f && Math.cos(tick) > -0.4f)
+        martin.setX(martinStartX + ((float)Math.cos(tick) * 10) / 1);
     }
 
     @Override

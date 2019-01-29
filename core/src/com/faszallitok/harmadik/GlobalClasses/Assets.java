@@ -43,7 +43,9 @@ public class Assets {
 	//public static final AssetDescriptor<TextureAtlas> LOADING_ATLAS = new AssetDescriptor<TextureAtlas>("atlasok/title.atlas", TextureAtlas.class);
 
 	//Menu
-	//public static final AssetDescriptor<Texture> MENU_BG = new AssetDescriptor<Texture>("menu.png", Texture.class);
+	public static final AssetDescriptor<Texture> MENU_BG = new AssetDescriptor<Texture>("bg.png", Texture.class);
+    public static final AssetDescriptor<Texture> MARTIN = new AssetDescriptor<Texture>("martin.png", Texture.class);
+
 	public static final AssetDescriptor<Texture> MENU_ICON = new AssetDescriptor<Texture>("menu-icon.png", Texture.class);
 
 	//Roads
@@ -67,6 +69,7 @@ public class Assets {
 	public static final AssetDescriptor<Texture> CAR_11 = new AssetDescriptor<Texture>("cars/car11.png", Texture.class);
 	public static final AssetDescriptor<Texture> CAR_12 = new AssetDescriptor<Texture>("cars/car12.png", Texture.class);
 	public static final AssetDescriptor<Texture> CAR_13 = new AssetDescriptor<Texture>("cars/car13.png", Texture.class);
+
 
 	//Button
 	public static final AssetDescriptor<Texture> BTN_BACK = new AssetDescriptor<Texture>("ui_textures/btn_back.png", Texture.class);
@@ -100,6 +103,9 @@ public class Assets {
 		manager.setLoader(FreeTypeFontGenerator.class, new FreeTypeFontGeneratorLoader(resolver));
 		manager.setLoader(BitmapFont.class, ".ttf", new FreetypeFontLoader(resolver));
 		manager.setLoader(BitmapFont.class, ".otf", new FreetypeFontLoader(resolver));
+
+		manager.load(MENU_BG);
+		manager.load(MARTIN);
 
 		manager.load(ROAD_STRAIGHT);
 		manager.load(ROAD_CROSS);

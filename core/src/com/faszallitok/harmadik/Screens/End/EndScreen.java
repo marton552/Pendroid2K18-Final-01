@@ -7,9 +7,9 @@ import com.faszallitok.harmadik.MyGdxGame;
 public class EndScreen extends MyScreen {
     EndStage endStage;
 
-    public EndScreen(MyGdxGame game, int death_type, int dealt_damage, int ellapsed_secs, int missed_strikes) {
+    public EndScreen(MyGdxGame game, int score) {
         super(game);
-        endStage = new EndStage(spriteBatch, game, death_type, dealt_damage, ellapsed_secs, missed_strikes);
+        endStage = new EndStage(spriteBatch, game, score);
         Gdx.input.setInputProcessor(endStage);
     }
 

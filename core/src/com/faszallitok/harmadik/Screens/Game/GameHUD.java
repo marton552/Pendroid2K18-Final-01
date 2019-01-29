@@ -9,9 +9,12 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.faszallitok.harmadik.GlobalClasses.Assets;
 import com.faszallitok.harmadik.MyBaseClasses.Scene2D.MyStage;
 import com.faszallitok.harmadik.MyBaseClasses.Scene2D.OneSpriteStaticActor;
+import com.faszallitok.harmadik.MyBaseClasses.UI.MyLabel;
 import com.faszallitok.harmadik.MyGdxGame;
 
 public class GameHUD extends MyStage {
+    MyLabel scoreLabel;
+
     public GameHUD(Batch batch, MyGdxGame game, final GameScreen screen) {
         super(new ExtendViewport(576, 1024, new OrthographicCamera(576, 1024)), batch, game);
 
@@ -26,6 +29,16 @@ public class GameHUD extends MyStage {
             }
         });
         addActor(menu);
+
+        scoreLabel = new MyLabel("0", game.getLabelStyle());
+        scoreLabel.setFontScale(2);
+        addActor(scoreLabel);
+        updateGameHud(0);
+    }
+
+    public void updateGameHud(int score) {
+        scoreLabel.setText(""+score);
+        scoreLabel.setPosition(getViewport().getWorldWidth() / 2 - scoreLabel.getWidth() / 2, getViewport().getWorldHeight() - scoreLabel.getHeight() - 5);
     }
 
     @Override
