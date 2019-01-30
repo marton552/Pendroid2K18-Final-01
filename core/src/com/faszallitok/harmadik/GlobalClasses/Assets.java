@@ -47,7 +47,12 @@ public class Assets {
 	public static final AssetDescriptor<Texture> MENU_BG = new AssetDescriptor<Texture>("bg.png", Texture.class);
     public static final AssetDescriptor<Texture> MARTIN = new AssetDescriptor<Texture>("martin.png", Texture.class);
 
+	public static final AssetDescriptor<Texture> END = new AssetDescriptor<Texture>("end.png", Texture.class);
 	public static final AssetDescriptor<Texture> MENU_ICON = new AssetDescriptor<Texture>("menu-icon.png", Texture.class);
+
+	//garazs
+	public static final AssetDescriptor<Texture> GAR_BG = new AssetDescriptor<Texture>("Textures/garazs_bg.png", Texture.class);
+	public static final AssetDescriptor<Texture> GAR_TOP = new AssetDescriptor<Texture>("Textures/garazs.png", Texture.class);
 
 	//Roads
 	public static final AssetDescriptor<Texture> ROAD_STRAIGHT = new AssetDescriptor<Texture>("roads/straight.png", Texture.class);
@@ -70,6 +75,8 @@ public class Assets {
 	public static final AssetDescriptor<Texture> CAR_11 = new AssetDescriptor<Texture>("cars/car11.png", Texture.class);
 	public static final AssetDescriptor<Texture> CAR_12 = new AssetDescriptor<Texture>("cars/car12.png", Texture.class);
 	public static final AssetDescriptor<Texture> CAR_13 = new AssetDescriptor<Texture>("cars/car13.png", Texture.class);
+	public static final AssetDescriptor<Texture> CAR_14 = new AssetDescriptor<Texture>("cars/car14.png", Texture.class);
+	public static final AssetDescriptor<Texture> CAR_15 = new AssetDescriptor<Texture>("cars/car15.png", Texture.class);
 
 
 	//Button
@@ -109,6 +116,10 @@ public class Assets {
 
 		manager.load(MENU_BG);
 		manager.load(MARTIN);
+		manager.load(END);
+
+		manager.load(GAR_BG);
+		manager.load(GAR_TOP);
 
 		manager.load(ROAD_STRAIGHT);
 		manager.load(ROAD_CROSS);
@@ -129,6 +140,8 @@ public class Assets {
 		manager.load(CAR_11);
 		manager.load(CAR_12);
 		manager.load(CAR_13);
+		manager.load(CAR_14);
+		manager.load(CAR_15);
 
 		manager.load(MENU_ICON);
 		manager.load(BTN_BACK);

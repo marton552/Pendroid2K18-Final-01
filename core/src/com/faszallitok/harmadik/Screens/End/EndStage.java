@@ -19,7 +19,7 @@ public class EndStage extends MyStage {
     public EndStage(Batch batch, final MyGdxGame game, int score) {
         super(new ExtendViewport(576, 1024, new OrthographicCamera(576, 1024)), batch, game);
 
-        OneSpriteStaticActor bg = new OneSpriteStaticActor(Assets.manager.get(Assets.MENU_BG));
+        OneSpriteStaticActor bg = new OneSpriteStaticActor(Assets.manager.get(Assets.END));
         bg.setSize(getViewport().getWorldWidth(), getViewport().getWorldHeight());
         addActor(bg);
 
