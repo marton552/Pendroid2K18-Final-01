@@ -27,7 +27,7 @@ public class RoadStraight extends Road {
     protected void positionChanged() {
         super.positionChanged();
 
-        if(randomInt(0, 101) > 50){
+        if(randomInt(0, 101) < 75){
             OneSpriteStaticActor otherCar = new OneSpriteStaticActor(Assets.manager.get(GameStage.getRandomCarSkin()));
             otherCar.setSize(otherCar.getWidth() / 3, otherCar.getHeight() / 3);
             //addCollisionShape("othercar", new MyRectangle(otherCar.getWidth() - 60, otherCar.getHeight() - 60, 30, 30));

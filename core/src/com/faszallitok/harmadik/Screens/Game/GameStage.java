@@ -25,6 +25,7 @@ import com.faszallitok.harmadik.Screens.Game.Roads.RoadCircle;
 import com.faszallitok.harmadik.Screens.Game.Roads.RoadCross;
 import com.faszallitok.harmadik.Screens.Game.Roads.RoadLeft;
 import com.faszallitok.harmadik.Screens.Game.Roads.RoadRight;
+import com.faszallitok.harmadik.Screens.Game.Roads.RoadRiver;
 import com.faszallitok.harmadik.Screens.Game.Roads.RoadStraight;
 import com.faszallitok.harmadik.Screens.Menu.MenuScreen;
 
@@ -90,13 +91,15 @@ public class GameStage extends MyStage {
     }
 
     Road getRandomRoad() {
-        int randNum = randomInt(1, 6); //3 típusú út.
+        int randNum = randomInt(1, 7); //3 típusú út.
         //randNum = 1;
         if(randNum == 1)        return new RoadStraight();
         else if (randNum == 2)  return new RoadCross();
         else if (randNum == 3)  return new RoadCircle();
         else if (randNum == 4)  return new RoadLeft();
         else if (randNum == 5)  return new RoadRight();
+        else if (randNum == 6)  return new RoadRiver();
+
 
 
         return new RoadStraight();

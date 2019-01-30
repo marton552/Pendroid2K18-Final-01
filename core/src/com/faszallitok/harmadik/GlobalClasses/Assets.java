@@ -56,6 +56,7 @@ public class Assets {
 
 	//Roads
 	public static final AssetDescriptor<Texture> ROAD_STRAIGHT = new AssetDescriptor<Texture>("roads/straight.png", Texture.class);
+	public static final AssetDescriptor<Texture> ROAD_RIVER = new AssetDescriptor<Texture>("roads/river.png", Texture.class);
 	public static final AssetDescriptor<Texture> ROAD_CROSS = new AssetDescriptor<Texture>("roads/cross.png", Texture.class);
 	public static final AssetDescriptor<Texture> ROAD_CIRCLE = new AssetDescriptor<Texture>("roads/circle.png", Texture.class);
 	public static final AssetDescriptor<Texture> ROAD_LEFT = new AssetDescriptor<Texture>("roads/left.png", Texture.class);
@@ -122,6 +123,7 @@ public class Assets {
 		manager.load(GAR_TOP);
 
 		manager.load(ROAD_STRAIGHT);
+		manager.load(ROAD_RIVER);
 		manager.load(ROAD_CROSS);
 		manager.load(ROAD_CIRCLE);
 		manager.load(ROAD_LEFT);
