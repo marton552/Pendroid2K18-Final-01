@@ -13,6 +13,7 @@ import com.faszallitok.harmadik.MyBaseClasses.UI.MyButton;
 import com.faszallitok.harmadik.MyGdxGame;
 import com.faszallitok.harmadik.Screens.About.AboutScreen;
 import com.faszallitok.harmadik.Screens.Game.GameScreen;
+import com.faszallitok.harmadik.Screens.Skin.SkinScreen;
 
 public class MenuStage extends MyStage {
 
@@ -45,7 +46,7 @@ public class MenuStage extends MyStage {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
-                getGame().setScreen(new GameScreen(getGame()));
+                getGame().setScreen(new SkinScreen(getGame()));
             }
         });
         addActor(play);

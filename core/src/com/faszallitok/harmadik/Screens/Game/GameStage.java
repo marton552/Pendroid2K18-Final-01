@@ -15,6 +15,7 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.faszallitok.harmadik.GlobalClasses.Assets;
 import com.faszallitok.harmadik.MyBaseClasses.Scene2D.MyRectangle;
 import com.faszallitok.harmadik.MyBaseClasses.Scene2D.MyStage;
+import com.faszallitok.harmadik.MyBaseClasses.Scene2D.OneSpriteAnimatedActor;
 import com.faszallitok.harmadik.MyBaseClasses.Scene2D.OneSpriteStaticActor;
 import com.faszallitok.harmadik.MyGdxGame;
 import com.faszallitok.harmadik.Screens.End.EndScreen;
@@ -39,8 +40,10 @@ public class GameStage extends MyStage {
     private long startTimer = System.currentTimeMillis();
 
     private GameScreen screen;
+    private OneSpriteAnimatedActor explosion;
+    private boolean startedExplosion = false;
 
-    public GameStage(Batch batch, MyGdxGame game, GameScreen screen) {
+    public GameStage(Batch batch, MyGdxGame game, GameScreen screen, AssetDescriptor<Texture> skin) {
         super(new ExtendViewport(576, 1024, new OrthographicCamera(576, 1024)), batch, game);
         this.screen = screen;
 
@@ -48,7 +51,7 @@ public class GameStage extends MyStage {
             addRoad();
         }
 
-        car = new Player(Assets.manager.get(Assets.CAR_13));
+        car = new Player(Assets.manager.get(skin));
         car.setSize(car.getWidth() / 3, car.getHeight() / 3);
         car.setPosition(getViewport().getWorldWidth() / 2 - car.getWidth() / 2, 100);
         pDirX = car.getX();
@@ -111,59 +114,73 @@ public class GameStage extends MyStage {
     @Override
     public void act(float delta) {
         super.act(delta);
-        car.setY(car.getY() + SPEED);
-        getCamera().position.y = car.getY() + 300;
+        if(startedExplosion == false) {
+            car.setY(car.getY() + SPEED);
+            getCamera().position.y = car.getY() + 300;
 
-        if(car.getX() != pDirX)
-        car.setX(car.getX() - (car.getX() - pDirX) / 7);
+            if (car.getX() != pDirX)
+                car.setX(car.getX() - (car.getX() - pDirX) / 7);
 
-        if(car.getX() + car.getWidth() / 2 - getViewport().getWorldWidth() / 2 > roads.get(0).getX() && car.getX() + car.getWidth() / 2 + getViewport().getWorldWidth() / 2 < roads.get(0).getX() + roads.get(0).getWidth())
-            getCamera().position.x = car.getX() + car.getWidth() / 2;
+            if (car.getX() + car.getWidth() / 2 - getViewport().getWorldWidth() / 2 > roads.get(0).getX() && car.getX() + car.getWidth() / 2 + getViewport().getWorldWidth() / 2 < roads.get(0).getX() + roads.get(0).getWidth())
+                getCamera().position.x = car.getX() + car.getWidth() / 2;
 
-        for (int i = 0; i < roads.size(); i++) {
-            if(roads.get(i).getY() + roads.get(i).getHeight()+getViewport().getWorldHeight() <= getCamera().position.y){
-                getActors().removeValue(roads.get(i), false);
-                roads.set(i, null);
-                roads.remove(i);
-                addRoad();
+            for (int i = 0; i < roads.size(); i++) {
+                if (roads.get(i).getY() + roads.get(i).getHeight() + getViewport().getWorldHeight() <= getCamera().position.y) {
+                    getActors().removeValue(roads.get(i), false);
+                    roads.set(i, null);
+                    roads.remove(i);
+                    addRoad();
+                }
             }
-        }
 
-        if(startTimer + 1000 < System.currentTimeMillis()) {
-            SCORE++;
-            startTimer = System.currentTimeMillis();
-            screen.gameHud.updateGameHud(SCORE);
-        }
-
-        tick++;
-        if(tick > 500) { SPEED++; tick = 0;}
-        if(Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
-            getCamera().position.y -= 5;
-        }
-        if(Gdx.input.isKeyPressed(Input.Keys.UP)) {
-            getCamera().position.y += 5;
-        }
-        if(Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
-            getCamera().position.x += 5;
-        }
-        if(Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
-            getCamera().position.x -= 5;
-        }
-
-        if(Gdx.input.isKeyPressed(Input.Keys.SPACE)) {
-            SPEED = 10;
-        }//else SPEED = 0;
-
-
-        for (int i = 0; i < roads.size(); i++) {
-            if(car.overlaps(roads.get(i))) {
-                gameOver();
+            if (startTimer + 1000 < System.currentTimeMillis()) {
+                SCORE++;
+                startTimer = System.currentTimeMillis();
+                screen.gameHud.updateGameHud(SCORE);
             }
+
+            tick++;
+            if (tick > 500) {
+                SPEED++;
+                tick = 0;
+            }
+            if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
+                getCamera().position.y -= 5;
+            }
+            if (Gdx.input.isKeyPressed(Input.Keys.UP)) {
+                getCamera().position.y += 5;
+            }
+            if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
+                getCamera().position.x += 5;
+            }
+            if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
+                getCamera().position.x -= 5;
+            }
+
+            if (Gdx.input.isKeyPressed(Input.Keys.SPACE)) {
+                SPEED = 10;
+            }//else SPEED = 0;
+
+
+            for (int i = 0; i < roads.size(); i++) {
+                if (car.overlaps(roads.get(i))) {
+                    gameOver();
+                }
+            }
+        }else {
+            if(explosion.isRunning() == false) game.setScreen(new EndScreen(game, SCORE));
         }
     }
 
     private void gameOver() {
-        game.setScreen(new EndScreen(game, SCORE));
+        explosion = new OneSpriteAnimatedActor(Assets.manager.get(Assets.EXPLOSION_ATLAS));
+        explosion.setSize(explosion.getWidth() * 2, explosion.getHeight() * 2);
+        explosion.setPosition(car.getX() + car.getWidth() / 2 - explosion.getWidth() / 2, car.getY() + car.getHeight() / 2 - explosion.getHeight() / 2);
+        explosion.start();
+        explosion.setLooping(false);
+        car.setVisible(false);
+        addActor(explosion);
+        startedExplosion = true;
     }
 
     @Override
@@ -172,7 +189,8 @@ public class GameStage extends MyStage {
 
         getBatch().setProjectionMatrix(getCamera().combined);
         getBatch().begin();
-        car.draw(getBatch(), 1);
+        if(car.isVisible()) car.draw(getBatch(), 1);
+        if(startedExplosion) explosion.draw(getBatch(), 1);
         getBatch().end();
     }
 

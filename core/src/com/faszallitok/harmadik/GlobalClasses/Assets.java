@@ -9,6 +9,7 @@ import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGeneratorLoader;
 import com.badlogic.gdx.graphics.g2d.freetype.FreetypeFontLoader;
@@ -40,7 +41,7 @@ public class Assets {
 
 
 	//Atlasok
-	//public static final AssetDescriptor<TextureAtlas> LOADING_ATLAS = new AssetDescriptor<TextureAtlas>("atlasok/title.atlas", TextureAtlas.class);
+	public static final AssetDescriptor<TextureAtlas> EXPLOSION_ATLAS = new AssetDescriptor<TextureAtlas>("atlasok/explosion.atlas", TextureAtlas.class);
 
 	//Menu
 	public static final AssetDescriptor<Texture> MENU_BG = new AssetDescriptor<Texture>("bg.png", Texture.class);
@@ -103,6 +104,8 @@ public class Assets {
 		manager.setLoader(FreeTypeFontGenerator.class, new FreeTypeFontGeneratorLoader(resolver));
 		manager.setLoader(BitmapFont.class, ".ttf", new FreetypeFontLoader(resolver));
 		manager.setLoader(BitmapFont.class, ".otf", new FreetypeFontLoader(resolver));
+
+		manager.load(EXPLOSION_ATLAS);
 
 		manager.load(MENU_BG);
 		manager.load(MARTIN);

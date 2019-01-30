@@ -2,6 +2,8 @@ package com.faszallitok.harmadik.Screens.Game;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
+import com.badlogic.gdx.assets.AssetDescriptor;
+import com.badlogic.gdx.graphics.Texture;
 import com.faszallitok.harmadik.MyBaseClasses.Scene2D.MyScreen;
 import com.faszallitok.harmadik.MyGdxGame;
 
@@ -12,12 +14,12 @@ public class GameScreen extends MyScreen {
     GameStage gameStage;
     public GameHUD gameHud;
 
-    public GameScreen(MyGdxGame game) {
+    public GameScreen(MyGdxGame game, AssetDescriptor<Texture> skin) {
         super(game);
 
         gameMenu = new GameMenu(spriteBatch, game, this);
         gameHud = new GameHUD(spriteBatch, game, this);
-        gameStage = new GameStage(spriteBatch, game, this);
+        gameStage = new GameStage(spriteBatch, game, this, skin);
 
         InputMultiplexer multiplexer = new InputMultiplexer();
 
