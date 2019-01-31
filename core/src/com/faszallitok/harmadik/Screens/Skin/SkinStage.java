@@ -56,7 +56,7 @@ public class SkinStage extends MyStage {
         jobb.setPosition(getViewport().getWorldWidth()-getViewport().getWorldWidth()/10-jobb.getWidth(),getViewport().getWorldHeight()/10);
 
 
-        MyButton btn = new MyButton("Play", game.getButtonStyle());
+        MyButton btn = new MyButton("Játék", game.getButtonStyle());
         addActor(btn);
         btn.setPosition(getViewport().getWorldWidth()/2-btn.getWidth()/2,getViewport().getWorldHeight()/10);
         btn.addListener(new ClickListener() {

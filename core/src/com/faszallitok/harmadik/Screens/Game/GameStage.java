@@ -48,11 +48,13 @@ public class GameStage extends MyStage {
     private boolean startedExplosion = false;
     OneSpriteStaticActor red;
     boolean bool1;
+    public boolean challange;
 
     public GameStage(Batch batch, MyGdxGame game, GameScreen screen, AssetDescriptor<Texture> skin, boolean challange) {
         super(new ExtendViewport(576, 1024, new OrthographicCamera(576, 1024)), batch, game);
         this.screen = screen;
         bool1 = challange;
+        this.challange = challange;
 
         for(int i = 0; i < 3; i++) {
             addRoad();
@@ -93,6 +95,7 @@ public class GameStage extends MyStage {
             red.setVisible(true);
             explosion1.setVisible(true);
             explosion3.setVisible(true);
+            Assets.manager.get(Assets.METAL).setLooping(true);
             Assets.manager.get(Assets.METAL).play();
         }
     }

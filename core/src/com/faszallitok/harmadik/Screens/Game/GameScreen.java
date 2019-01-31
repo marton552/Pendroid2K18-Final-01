@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.assets.AssetDescriptor;
 import com.badlogic.gdx.graphics.Texture;
+import com.faszallitok.harmadik.MusicPlayer;
 import com.faszallitok.harmadik.MyBaseClasses.Scene2D.MyScreen;
 import com.faszallitok.harmadik.MyGdxGame;
 
@@ -16,6 +17,8 @@ public class GameScreen extends MyScreen {
 
     public GameScreen(MyGdxGame game, AssetDescriptor<Texture> skin, boolean challange) {
         super(game);
+        if(challange == false) MusicPlayer.startGameMusic();
+        else { MusicPlayer.stopAllMusic(); }
 
         gameMenu = new GameMenu(spriteBatch, game, this);
         gameHud = new GameHUD(spriteBatch, game, this);

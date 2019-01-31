@@ -35,9 +35,9 @@ public class AboutStage extends MyStage {
         title.setFontScale(1.6f);
         addActor(title);
 
-        info = new MyLabel("Az autót az ujjaddal tudod irányítani,\nígy kell az úton maradnod,\nés az autókat kikerülnöd\n\nKészítők: A Fa Szállítók csapata", game.getLabelStyle());
+        info = new MyLabel("Az autót az ujjaddal tudod irányítani,\nígy kell az úton maradnod,\nés az autókat kikerülnöd.\nAz igazi élmény érdekében,\nhanggal játszd a játékot.\n\nKészítők: A Fa Szállítók csapata", game.getLabelStyle());
         info.setAlignment(Align.center);
-        info.setPosition(getViewport().getWorldWidth() / 2 - info.getWidth() / 2, getViewport().getWorldHeight()/7);
+        info.setPosition(getViewport().getWorldWidth() / 2 - info.getWidth() / 2, getViewport().getWorldHeight()/7 - 50);
         addActor(info);
 
         back = new MyButton("Menü", game.getButtonStyle());

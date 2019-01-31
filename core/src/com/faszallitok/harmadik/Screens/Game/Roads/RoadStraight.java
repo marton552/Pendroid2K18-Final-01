@@ -61,7 +61,7 @@ public class RoadStraight extends Road {
             if(obstacles.get(i).getY() + obstacles.get(i).getHeight() < stage.car.getY()) {
                if(obstacles.get(i).beszolt == false) {
                    // Megelőzte.
-                   Assets.manager.get(getRandomBreszolas()).play(0.5f);
+                   if(stage.challange == false) Assets.manager.get(getRandomBreszolas()).play(0.5f);
                    obstacles.get(i).beszolt = true;
                }
 

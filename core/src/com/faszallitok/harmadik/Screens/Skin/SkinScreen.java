@@ -1,6 +1,7 @@
 package com.faszallitok.harmadik.Screens.Skin;
 
 import com.badlogic.gdx.Gdx;
+import com.faszallitok.harmadik.MusicPlayer;
 import com.faszallitok.harmadik.MyBaseClasses.Scene2D.MyScreen;
 import com.faszallitok.harmadik.MyGdxGame;
 import com.faszallitok.harmadik.Screens.Game.GameStage;
@@ -10,6 +11,7 @@ public class SkinScreen extends MyScreen {
 
     public SkinScreen(MyGdxGame game) {
         super(game);
+        MusicPlayer.startMenuMusic();
 
         skinStage = new SkinStage(spriteBatch, game);
         Gdx.input.setInputProcessor(skinStage);

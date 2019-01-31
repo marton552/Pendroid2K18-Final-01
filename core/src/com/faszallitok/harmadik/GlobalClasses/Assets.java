@@ -110,6 +110,8 @@ public class Assets {
 
 	//Music
 	public static final AssetDescriptor<Music> MENU_MUSIC = new AssetDescriptor<Music>("zene/1.ogg", Music.class);
+	public static final AssetDescriptor<Music> GAME_MUSIC = new AssetDescriptor<Music>("zene/2.ogg", Music.class);
+
 	public static final AssetDescriptor<Music> METAL = new AssetDescriptor<Music>("zene/metal.ogg", Music.class);
 
 
@@ -182,6 +184,7 @@ public class Assets {
 		manager.load(DARK);
 
 		manager.load(MENU_MUSIC);
+		manager.load(GAME_MUSIC);
 		manager.load(METAL);
 
 		manager.load(ALEGREYAREGULAR_FONT);

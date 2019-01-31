@@ -1,6 +1,7 @@
 package com.faszallitok.harmadik.Screens.Menu;
 
 import com.badlogic.gdx.Gdx;
+import com.faszallitok.harmadik.MusicPlayer;
 import com.faszallitok.harmadik.MyBaseClasses.Scene2D.MyScreen;
 import com.faszallitok.harmadik.MyGdxGame;
 
@@ -10,6 +11,8 @@ public class MenuScreen extends MyScreen {
 
     public MenuScreen(MyGdxGame game) {
         super(game);
+        MusicPlayer.startMenuMusic();
+
         menuStage = new MenuStage(spriteBatch, game);
         Gdx.input.setInputProcessor(menuStage);
     }
