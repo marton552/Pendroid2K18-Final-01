@@ -182,6 +182,7 @@ public class GameStage extends MyStage {
         explosion.setPosition(car.getX() + car.getWidth() / 2 - explosion.getWidth() / 2, car.getY() + car.getHeight() / 2 - explosion.getHeight() / 2);
         explosion.start();
         explosion.setLooping(false);
+        Assets.manager.get(Assets.SOUND_EXPLOSION).play(0.7f);
         car.setVisible(false);
         addActor(explosion);
         startedExplosion = true;
