@@ -56,6 +56,7 @@ public class Assets {
 
 	//hand
 	public static final AssetDescriptor<Texture> HAND = new AssetDescriptor<Texture>("Textures/hand.png", Texture.class);
+	public static final AssetDescriptor<Texture> MOBIL = new AssetDescriptor<Texture>("Textures/mobile.png", Texture.class);
 
 	//Roads
 	public static final AssetDescriptor<Texture> ROAD_STRAIGHT = new AssetDescriptor<Texture>("roads/straight.png", Texture.class);
@@ -129,6 +130,7 @@ public class Assets {
 		manager.load(GAR_BG);
 		manager.load(GAR_TOP);
 
+		manager.load(MOBIL);
 		manager.load(HAND);
 		manager.load(ROAD_STRAIGHT);
 		manager.load(ROAD_RIVER);

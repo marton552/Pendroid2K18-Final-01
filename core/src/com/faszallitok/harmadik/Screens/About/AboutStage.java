@@ -18,9 +18,15 @@ public class AboutStage extends MyStage {
     private MyButton back;
     private MyLabel title;
     private MyLabel info;
+    float x;
+    float y;
 
     public AboutStage(Batch batch, MyGdxGame game) {
         super(new ExtendViewport(576, 1024, new OrthographicCamera(576, 1024)), batch, game);
+
+        OneSpriteStaticActor bg = new OneSpriteStaticActor(Assets.manager.get(Assets.MENU_BG));
+        bg.setSize(getViewport().getWorldWidth(), getViewport().getWorldHeight());
+        addActor(bg);
 
         title = new MyLabel("A Játékról", game.getLabelStyle());
         title.setAlignment(Align.center);
@@ -44,6 +50,17 @@ public class AboutStage extends MyStage {
         });
         addActor(back);
 
+        OneSpriteStaticActor mobil = new OneSpriteStaticActor(Assets.manager.get(Assets.MOBIL));
+        addActor(mobil);
+        mobil.setSize(mobil.getWidth()/5,mobil.getHeight()/5);
+        mobil.setPosition(getViewport().getWorldWidth()/2-mobil.getWidth()/2,getViewport().getWorldHeight()/2);
+
+        x=getViewport().getWorldWidth()/2-mobil.getWidth()/2;
+        y=getViewport().getWorldHeight()/2;
+        OneSpriteStaticActor hand = new OneSpriteStaticActor(Assets.manager.get(Assets.HAND));
+        addActor(hand);
+        hand.setSize(hand.getWidth()/3,hand.getHeight()/3);
+        hand.setPosition(x,y);
     }
 
     @Override

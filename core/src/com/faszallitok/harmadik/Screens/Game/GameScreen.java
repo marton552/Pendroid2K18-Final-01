@@ -11,7 +11,7 @@ public class GameScreen extends MyScreen {
 
     public boolean isPaused = false;
     GameMenu gameMenu;
-    GameStage gameStage;
+    public GameStage gameStage;
     public GameHUD gameHud;
 
     public GameScreen(MyGdxGame game, AssetDescriptor<Texture> skin) {

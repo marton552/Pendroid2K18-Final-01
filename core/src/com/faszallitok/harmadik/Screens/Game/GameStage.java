@@ -34,7 +34,7 @@ import java.util.ArrayList;
 public class GameStage extends MyStage {
     private ArrayList<Road> roads = new ArrayList<Road>();
     private int SPEED = 7;
-    public Player car;
+    private Player car;
     public int SCORE = 0;
 
     private float pDirX = 0;
@@ -188,7 +188,7 @@ public class GameStage extends MyStage {
     }
 
     double calcAngle(float a, float c) {
-        //System.out.println("a: "+a+" c: "+c+" = "+(Math.toDegrees(Math.asin(a / c))));
+        System.out.println("a: "+a+" c: "+c+" = "+(Math.toDegrees(Math.asin(a / c))));
         return Math.round(Math.toDegrees(Math.asin(a / c)));
     }
 
