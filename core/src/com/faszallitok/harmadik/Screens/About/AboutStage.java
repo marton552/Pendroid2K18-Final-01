@@ -20,11 +20,12 @@ public class AboutStage extends MyStage {
     private MyLabel info;
     float x;
     float y;
+    OneSpriteStaticActor hand;
 
     public AboutStage(Batch batch, MyGdxGame game) {
         super(new ExtendViewport(576, 1024, new OrthographicCamera(576, 1024)), batch, game);
 
-        OneSpriteStaticActor bg = new OneSpriteStaticActor(Assets.manager.get(Assets.MENU_BG));
+        OneSpriteStaticActor bg = new OneSpriteStaticActor(Assets.manager.get(Assets.ABOUT));
         bg.setSize(getViewport().getWorldWidth(), getViewport().getWorldHeight());
         addActor(bg);
 
@@ -52,15 +53,24 @@ public class AboutStage extends MyStage {
 
         OneSpriteStaticActor mobil = new OneSpriteStaticActor(Assets.manager.get(Assets.MOBIL));
         addActor(mobil);
-        mobil.setSize(mobil.getWidth()/5,mobil.getHeight()/5);
-        mobil.setPosition(getViewport().getWorldWidth()/2-mobil.getWidth()/2,getViewport().getWorldHeight()/2);
+        mobil.setSize(mobil.getWidth()/4,mobil.getHeight()/4);
+        mobil.setPosition(getViewport().getWorldWidth()/2-mobil.getWidth()/2,getViewport().getWorldHeight()/3+50);
 
         x=getViewport().getWorldWidth()/2-mobil.getWidth()/2;
-        y=getViewport().getWorldHeight()/2;
-        OneSpriteStaticActor hand = new OneSpriteStaticActor(Assets.manager.get(Assets.HAND));
+        y=getViewport().getWorldHeight()/3+50;
+        hand = new OneSpriteStaticActor(Assets.manager.get(Assets.HAND));
         addActor(hand);
-        hand.setSize(hand.getWidth()/3,hand.getHeight()/3);
+        hand.setSize(hand.getWidth()/2,hand.getHeight()/2);
         hand.setPosition(x,y);
+    }
+
+    public float count = 0;
+
+    public void act(float delta) {
+        super.act(delta);
+        count += 0.02;
+        hand.setX(x - ((float)Math.cos(count) * 10) / 1);
+        hand.setY(y + ((float)Math.cos(count) * 10) / 1);
     }
 
     @Override

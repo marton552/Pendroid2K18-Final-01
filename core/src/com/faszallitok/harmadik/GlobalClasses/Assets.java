@@ -49,6 +49,8 @@ public class Assets {
 
 	public static final AssetDescriptor<Texture> END = new AssetDescriptor<Texture>("end.png", Texture.class);
 	public static final AssetDescriptor<Texture> MENU_ICON = new AssetDescriptor<Texture>("menu-icon.png", Texture.class);
+	public static final AssetDescriptor<Texture> ABOUT = new AssetDescriptor<Texture>("Textures/about_bg.png", Texture.class);
+	public static final AssetDescriptor<Texture> TITLE = new AssetDescriptor<Texture>("Textures/title.png", Texture.class);
 
 	//garazs
 	public static final AssetDescriptor<Texture> GAR_BG = new AssetDescriptor<Texture>("Textures/garazs_bg.png", Texture.class);
@@ -127,9 +129,11 @@ public class Assets {
 		manager.load(MARTIN);
 		manager.load(END);
 
+		manager.load(ABOUT);
 		manager.load(GAR_BG);
 		manager.load(GAR_TOP);
 
+		manager.load(TITLE);
 		manager.load(MOBIL);
 		manager.load(HAND);
 		manager.load(ROAD_STRAIGHT);
