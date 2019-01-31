@@ -29,7 +29,7 @@ public class GameMenu extends MyStage {
         darkPixmap.fill();
         OneSpriteStaticActor bg = new OneSpriteStaticActor(new Texture(darkPixmap));
         bg.setSize(getViewport().getWorldWidth(), getViewport().getWorldHeight());
-
+        bg.setPosition(0, 0);
         addActor(bg);
 
         title = new MyLabel("Menü", game.getLabelStyle());

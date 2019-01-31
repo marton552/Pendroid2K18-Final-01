@@ -43,8 +43,8 @@ public class SkinStage extends MyStage {
         kocsi.setRotation(-90);
 
         toplayer = new OneSpriteStaticActor(Assets.manager.get(Assets.GAR_TOP));
-        addActor(toplayer);
         toplayer.setSize(getViewport().getWorldWidth(),getViewport().getWorldHeight());
+        addActor(toplayer);
 
 
         MyButton bal = new MyButton("<",game.getButtonStyle());

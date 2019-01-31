@@ -38,6 +38,7 @@ public class GameStage extends MyStage {
     public int SCORE = 0;
 
     private float pDirX = 0;
+    private float pDirY = 0;
     private long startTimer = System.currentTimeMillis();
 
     private GameScreen screen;
@@ -66,6 +67,7 @@ public class GameStage extends MyStage {
                 super.touchDragged(event, x, y, pointer);
                 //car.setX(x - car.getWidth() / 2);
                 pDirX = x - car.getWidth() / 2;
+                pDirY = y;// - car.getHeight() / 2;
             }
         });
 
@@ -120,6 +122,7 @@ public class GameStage extends MyStage {
         if(startedExplosion == false) {
             car.setY(car.getY() + SPEED);
             getCamera().position.y = car.getY() + 300;
+            car.setRotation(-(float) calcAngle(pDirX - car.getX(), (float) Math.sqrt(Math.pow(pDirX - car.getX(), 2) + Math.pow(pDirY - car.getY(), 2))));
 
             if (car.getX() != pDirX)
                 car.setX(car.getX() - (car.getX() - pDirX) / 7);
@@ -185,6 +188,12 @@ public class GameStage extends MyStage {
         addActor(explosion);
         startedExplosion = true;
     }
+
+    double calcAngle(float a, float c) {
+        System.out.println("a: "+a+" c: "+c+" = "+(Math.toDegrees(Math.asin(a / c))));
+        return Math.round(Math.toDegrees(Math.asin(a / c)));
+    }
+
 
     @Override
     public void draw() {
