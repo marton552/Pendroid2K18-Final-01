@@ -34,7 +34,7 @@ import java.util.ArrayList;
 public class GameStage extends MyStage {
     private ArrayList<Road> roads = new ArrayList<Road>();
     private int SPEED = 7;
-    private Player car;
+    public Player car;
     public int SCORE = 0;
 
     private float pDirX = 0;
