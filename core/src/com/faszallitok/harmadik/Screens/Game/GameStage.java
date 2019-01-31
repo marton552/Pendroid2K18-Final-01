@@ -43,11 +43,16 @@ public class GameStage extends MyStage {
 
     private GameScreen screen;
     private OneSpriteAnimatedActor explosion;
+    private OneSpriteAnimatedActor explosion1;
+    private OneSpriteAnimatedActor explosion3;
     private boolean startedExplosion = false;
+    OneSpriteStaticActor red;
+    boolean bool1;
 
     public GameStage(Batch batch, MyGdxGame game, GameScreen screen, AssetDescriptor<Texture> skin, boolean challange) {
         super(new ExtendViewport(576, 1024, new OrthographicCamera(576, 1024)), batch, game);
         this.screen = screen;
+        bool1 = challange;
 
         for(int i = 0; i < 3; i++) {
             addRoad();
@@ -71,7 +76,25 @@ public class GameStage extends MyStage {
             }
         });
 
-
+        red = new OneSpriteStaticActor(Assets.manager.get(Assets.RED));
+        red.setSize(getViewport().getWorldWidth()*3,getViewport().getWorldHeight()*2);
+        addActor(red);
+        red.setZIndex(100);
+        red.setVisible(false);
+        explosion1 = new OneSpriteAnimatedActor(Assets.manager.get(Assets.EXPLOSION_ATLAS));
+        explosion1.setSize(explosion1.getWidth() * 2, explosion1.getHeight() * 2);
+        addActor(explosion1);
+        explosion3 = new OneSpriteAnimatedActor(Assets.manager.get(Assets.EXPLOSION_ATLAS));
+        explosion3.setSize(explosion3.getWidth() * 2, explosion3.getHeight() * 2);
+        addActor(explosion3);
+        explosion1.setVisible(false);
+        explosion3.setVisible(false);
+        if(challange) {
+            red.setVisible(true);
+            explosion1.setVisible(true);
+            explosion3.setVisible(true);
+            Assets.manager.get(Assets.METAL).play();
+        }
     }
 
     static int randomInt(int min, int max) {
@@ -113,6 +136,7 @@ public class GameStage extends MyStage {
 
 
     private int tick = 0;
+    private int tick3 = 0;
 
     @Override
     public void act(float delta) {
@@ -120,6 +144,9 @@ public class GameStage extends MyStage {
         if(startedExplosion == false) {
             car.setY(car.getY() + SPEED);
             getCamera().position.y = car.getY() + 300;
+            red.setX(car.getX()-getViewport().getWorldWidth());
+            red.setY(car.getY()-getViewport().getWorldHeight()/3);
+            red.setZIndex(100);
             car.setRotation(-(float) calcAngle(pDirX - car.getX(), (float) Math.sqrt(Math.pow(pDirX - car.getX(), 2) + Math.pow(pDirY - car.getY(), 2))));
 
             if (car.getX() != pDirX)
@@ -144,10 +171,27 @@ public class GameStage extends MyStage {
             }
 
             tick++;
-            if (tick > 500) {
+            tick3++;
+            explosion1.setZIndex(9);
+            explosion3.setZIndex(9);
+            if(bool1){
+                if(tick > 100){
+                    SPEED++;
+                    tick = 0;
+                    explosion1.setPosition(car.getX()-getViewport().getWorldWidth(),car.getY()+randomInt(-200,200));
+                }
+                if(tick3 > 150){
+                    SPEED++;
+                    tick3 = 0;
+                    explosion3.setPosition(car.getX()-getViewport().getWorldWidth()/2,car.getY()+randomInt(-200,200));
+                }
+            }
+            else if (tick > 500) {
                 SPEED++;
                 tick = 0;
             }
+
+
             if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
                 getCamera().position.y -= 5;
             }
@@ -183,6 +227,7 @@ public class GameStage extends MyStage {
         explosion.start();
         explosion.setLooping(false);
         Assets.manager.get(Assets.SOUND_EXPLOSION).play(0.7f);
+        Assets.manager.get(Assets.METAL).stop();
         car.setVisible(false);
         addActor(explosion);
         startedExplosion = true;

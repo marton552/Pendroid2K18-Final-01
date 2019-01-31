@@ -85,7 +85,8 @@ public class Assets {
 	public static final AssetDescriptor<Texture> CAR_14 = new AssetDescriptor<Texture>("cars/car14.png", Texture.class);
 	public static final AssetDescriptor<Texture> CAR_15 = new AssetDescriptor<Texture>("cars/car15.png", Texture.class);
 
-
+	public static final AssetDescriptor<Texture> METALCAR = new AssetDescriptor<Texture>("cars/metal_car.png", Texture.class);
+	public static final AssetDescriptor<Texture> RED = new AssetDescriptor<Texture>("ui_textures/red.png", Texture.class);
 	//Button
 	public static final AssetDescriptor<Texture> BTN_BACK = new AssetDescriptor<Texture>("ui_textures/btn_back.png", Texture.class);
 	public static final AssetDescriptor<Texture> BTN_HOVER = new AssetDescriptor<Texture>("ui_textures/btn_hover.png", Texture.class);
@@ -109,6 +110,7 @@ public class Assets {
 
 	//Music
 	public static final AssetDescriptor<Music> MENU_MUSIC = new AssetDescriptor<Music>("zene/1.ogg", Music.class);
+	public static final AssetDescriptor<Music> METAL = new AssetDescriptor<Music>("zene/metal.ogg", Music.class);
 
 
 
@@ -163,7 +165,9 @@ public class Assets {
 		manager.load(CAR_13);
 		manager.load(CAR_14);
 		manager.load(CAR_15);
+		manager.load(METALCAR);
 
+		manager.load(RED);
 		manager.load(MENU_ICON);
 		manager.load(BTN_BACK);
 		manager.load(BTN_HOVER);
@@ -178,6 +182,7 @@ public class Assets {
 		manager.load(DARK);
 
 		manager.load(MENU_MUSIC);
+		manager.load(METAL);
 
 		manager.load(ALEGREYAREGULAR_FONT);
 
