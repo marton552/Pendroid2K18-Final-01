@@ -14,12 +14,12 @@ public class GameScreen extends MyScreen {
     public GameStage gameStage;
     public GameHUD gameHud;
 
-    public GameScreen(MyGdxGame game, AssetDescriptor<Texture> skin) {
+    public GameScreen(MyGdxGame game, AssetDescriptor<Texture> skin, boolean challange) {
         super(game);
 
         gameMenu = new GameMenu(spriteBatch, game, this);
         gameHud = new GameHUD(spriteBatch, game, this);
-        gameStage = new GameStage(spriteBatch, game, this, skin);
+        gameStage = new GameStage(spriteBatch, game, this, skin, challange);
 
         InputMultiplexer multiplexer = new InputMultiplexer();
 

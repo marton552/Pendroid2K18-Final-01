@@ -17,8 +17,6 @@ import com.faszallitok.harmadik.MyBaseClasses.UI.MyLabel;
 import com.faszallitok.harmadik.MyGdxGame;
 import com.faszallitok.harmadik.Screens.Game.GameScreen;
 
-import sun.security.action.GetBooleanAction;
-
 public class SkinStage extends MyStage {
     public static AssetDescriptor<Texture>[] skins = new AssetDescriptor[]{Assets.CAR_12, Assets.CAR_13, Assets.CAR_14, Assets.CAR_15};
     private int currSkin = 0;
@@ -125,7 +123,7 @@ public class SkinStage extends MyStage {
             tick += 15;
             kocsi.setY(tick);
             if(tick>getViewport().getWorldHeight()+kocsi.getWidth()){
-                game.setScreen(new GameScreen(game, skins[currect]));
+                game.setScreen(new GameScreen(game, skins[currect], false));
             }
         }
         }

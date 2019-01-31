@@ -45,7 +45,7 @@ public class GameStage extends MyStage {
     private OneSpriteAnimatedActor explosion;
     private boolean startedExplosion = false;
 
-    public GameStage(Batch batch, MyGdxGame game, GameScreen screen, AssetDescriptor<Texture> skin) {
+    public GameStage(Batch batch, MyGdxGame game, GameScreen screen, AssetDescriptor<Texture> skin, boolean challange) {
         super(new ExtendViewport(576, 1024, new OrthographicCamera(576, 1024)), batch, game);
         this.screen = screen;
 
@@ -189,7 +189,7 @@ public class GameStage extends MyStage {
     }
 
     double calcAngle(float a, float c) {
-        System.out.println("a: "+a+" c: "+c+" = "+(Math.toDegrees(Math.asin(a / c))));
+        //System.out.println("a: "+a+" c: "+c+" = "+(Math.toDegrees(Math.asin(a / c))));
         return Math.round(Math.toDegrees(Math.asin(a / c)));
     }
 
