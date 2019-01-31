@@ -23,7 +23,10 @@ public class MenuStage extends MyStage {
     private MyButton challege;
 
     private OneSpriteStaticActor martin;
+    private OneSpriteStaticActor title;
     private float martinStartX = 0;
+    float x;
+    float y;
 
     public MenuStage(Batch batch, MyGdxGame game) {
         super(new ExtendViewport(576, 1024, new OrthographicCamera(576, 1024)), batch, game);
@@ -34,6 +37,13 @@ public class MenuStage extends MyStage {
         OneSpriteStaticActor bg = new OneSpriteStaticActor(Assets.manager.get(Assets.MENU_BG));
         bg.setSize(w, h);
         addActor(bg);
+
+        title = new OneSpriteStaticActor(Assets.manager.get(Assets.TITLE));
+        addActor(title);
+        title.setSize(title.getWidth(),title.getHeight());
+        x=getViewport().getWorldWidth()/2-title.getWidth()/2;
+        y=getViewport().getWorldHeight()-title.getHeight()-50;
+        title.setPosition(x,y);
 
         martin = new OneSpriteStaticActor(Assets.manager.get(Assets.MARTIN));
         martin.setSize(martin.getWidth() / 1.8f, martin.getHeight() / 1.8f);
@@ -99,6 +109,7 @@ public class MenuStage extends MyStage {
 
         //if(Math.cos(tick) < 0.4f && Math.cos(tick) > -0.4f)
         martin.setX(martinStartX + ((float)Math.cos(tick) * 10) / 1);
+        title.setY(y + ((float)Math.cos(tick) * 10) / 1);
     }
 
     @Override
