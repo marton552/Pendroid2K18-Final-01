@@ -1,6 +1,7 @@
 package com.faszallitok.harmadik.Screens.Game.Roads;
 
 import com.badlogic.gdx.assets.AssetDescriptor;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.faszallitok.harmadik.GlobalClasses.Assets;
@@ -13,14 +14,15 @@ import java.util.Random;
 
 public class RoadStraight extends Road {
 
-    public ArrayList<OneSpriteStaticActor> obstacles = new ArrayList<OneSpriteStaticActor>();
-    public RoadStraight() {
+    public ArrayList<Obsitcle> obstacles = new ArrayList<Obsitcle>();
+    GameStage stage;
+
+    public RoadStraight(GameStage stage) {
         super(Assets.manager.get(Assets.ROAD_STRAIGHT));
+        this.stage = stage;
+
         addCollisionShape("bal", new MyRectangle(60, getHeight(), 190, 0));
         addCollisionShape("jobb", new MyRectangle(60, getHeight(), 825, 0));
-
-        //stage.addActor(this);
-
     }
 
     @Override
@@ -28,7 +30,7 @@ public class RoadStraight extends Road {
         super.positionChanged();
 
         if(randomInt(0, 101) < 75){
-            OneSpriteStaticActor otherCar = new OneSpriteStaticActor(Assets.manager.get(GameStage.getRandomCarSkin()));
+            Obsitcle otherCar = new Obsitcle(Assets.manager.get(GameStage.getRandomCarSkin()));
             otherCar.setSize(otherCar.getWidth() / 3, otherCar.getHeight() / 3);
             //addCollisionShape("othercar", new MyRectangle(otherCar.getWidth() - 60, otherCar.getHeight() - 60, 30, 30));
 
@@ -43,8 +45,29 @@ public class RoadStraight extends Road {
 
             //otherCar.setDebug(true);
             obstacles.add(otherCar);
-            System.out.println("Obsticle "+obstacles.size());
+            //System.out.println("Obsticle "+obstacles.size());
         }
+    }
+
+    AssetDescriptor<Sound> getRandomBreszolas() {
+        AssetDescriptor<Sound>[] sounds = new AssetDescriptor[]{Assets.SOUND_1, Assets.SOUND_2, Assets.SOUND_3};
+        return sounds[randomInt(0, sounds.length)];
+    }
+
+    @Override
+    public void act(float delta) {
+        super.act(delta);
+        for (int i = 0; i < obstacles.size(); i++) {
+            if(obstacles.get(i).getY() + obstacles.get(i).getHeight() < stage.car.getY()) {
+               if(obstacles.get(i).beszolt == false) {
+                   // Megelőzte.
+                   Assets.manager.get(getRandomBreszolas()).play(0.5f);
+                   obstacles.get(i).beszolt = true;
+               }
+
+            }
+        }
+
     }
 
     @Override
@@ -53,7 +76,7 @@ public class RoadStraight extends Road {
 
         //batch.setProjectionMatrix(getStage().getCamera().combined);
         //batch.begin();
-        for(int i = 0; i < obstacles.size(); i++) obstacles.get(i).draw(batch, 1);
+        for(int i = 0; i < obstacles.size(); i++) obstacles.get(i).draw(batch, parentAlpha);
         //batch.end();
     }
 

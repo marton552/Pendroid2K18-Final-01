@@ -99,6 +99,10 @@ public class Assets {
 	public static final AssetDescriptor<Texture> DARK = new AssetDescriptor<Texture>("ui_textures/dark.png", Texture.class);
 
 	//Sounds
+	public static final AssetDescriptor<Sound> SOUND_1 = new AssetDescriptor<Sound>("sounds/sound1.wav", Sound.class);
+	public static final AssetDescriptor<Sound> SOUND_2 = new AssetDescriptor<Sound>("sounds/sound2.wav", Sound.class);
+	public static final AssetDescriptor<Sound> SOUND_3 = new AssetDescriptor<Sound>("sounds/sound3.wav", Sound.class);
+
 
 	//Music
 	public static final AssetDescriptor<Music> MENU_MUSIC = new AssetDescriptor<Music>("zene/1.ogg", Music.class);
@@ -132,6 +136,10 @@ public class Assets {
 		manager.load(ROAD_CIRCLE);
 		manager.load(ROAD_LEFT);
 		manager.load(ROAD_RIGHT);
+
+		manager.load(SOUND_1);
+		manager.load(SOUND_2);
+		manager.load(SOUND_3);
 
 		manager.load(CAR_1);
 		manager.load(CAR_2);

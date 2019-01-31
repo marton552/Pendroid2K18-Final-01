@@ -34,7 +34,7 @@ import java.util.ArrayList;
 public class GameStage extends MyStage {
     private ArrayList<Road> roads = new ArrayList<Road>();
     private int SPEED = 7;
-    private Player car;
+    public Player car;
     public int SCORE = 0;
 
     private float pDirX = 0;
@@ -95,16 +95,14 @@ public class GameStage extends MyStage {
     Road getRandomRoad() {
         int randNum = randomInt(1, 7); //3 típusú út.
         //randNum = 1;
-        if(randNum == 1)        return new RoadStraight();
+        if(randNum == 1)        return new RoadStraight(this);
         else if (randNum == 2)  return new RoadCross();
         else if (randNum == 3)  return new RoadCircle();
         else if (randNum == 4)  return new RoadLeft();
         else if (randNum == 5)  return new RoadRight();
-        else if (randNum == 6)  return new RoadRiver();
+        else if (randNum == 6)  return new RoadRiver(this);
 
-
-
-        return new RoadStraight();
+        return new RoadStraight(this);
     }
 
     public static AssetDescriptor<Texture> getRandomCarSkin() {
@@ -190,7 +188,7 @@ public class GameStage extends MyStage {
     }
 
     double calcAngle(float a, float c) {
-        System.out.println("a: "+a+" c: "+c+" = "+(Math.toDegrees(Math.asin(a / c))));
+        //System.out.println("a: "+a+" c: "+c+" = "+(Math.toDegrees(Math.asin(a / c))));
         return Math.round(Math.toDegrees(Math.asin(a / c)));
     }
 

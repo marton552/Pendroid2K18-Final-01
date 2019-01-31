@@ -8,9 +8,9 @@ public class DesktopLauncher {
 	public static void main (String[] arg) {
 		System.setProperty("user.name", "Public");
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
-		config.width = 576/2;
-		config.height = 1024/2;
-		config.resizable = false;
+		config.width = 576;
+		config.height = 1024;
+		//config.resizable = false;
 		new LwjglApplication(new MyGdxGame(), config);
 	}
 }
