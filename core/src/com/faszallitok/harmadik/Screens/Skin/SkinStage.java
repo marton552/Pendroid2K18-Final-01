@@ -27,6 +27,7 @@ public class SkinStage extends MyStage {
     private int megy = 0;
     private float tick = 0;
     private int currect = 0;
+    private boolean free = true;
 
     public SkinStage(Batch batch, final MyGdxGame game) {
 
@@ -64,8 +65,10 @@ public class SkinStage extends MyStage {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
+                if(free){
+                    free=false;
                 megy = 3;
-                tick = -90;
+                tick = -90;}
             }
         });
 
@@ -73,9 +76,11 @@ public class SkinStage extends MyStage {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
+                if(free){
+                    free=false;
                 megy = 1;
                 currect++;
-                tick = getViewport().getWorldWidth()/2-kocsi.getWidth()/2;
+                tick = getViewport().getWorldWidth()/2-kocsi.getWidth()/2;}
             }
         });
 
@@ -83,9 +88,11 @@ public class SkinStage extends MyStage {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
+                if(free){
+                    free=false;
                 megy = 1;
                 currect--;
-                tick=getViewport().getWorldWidth()/2-kocsi.getWidth()/2;
+                tick=getViewport().getWorldWidth()/2-kocsi.getWidth()/2;}
             }
         });
 
@@ -103,7 +110,7 @@ public class SkinStage extends MyStage {
             super.act(delta);
             tick += 10;
             kocsi.setX(tick);
-        if(tick >getViewport().getWorldWidth()/2-kocsi.getWidth()/2)megy=0;}
+        if(tick >getViewport().getWorldWidth()/2-kocsi.getWidth()/2){megy=0; free=true;}}
         else if(megy==3){
             super.act(delta);
             tick += 5;

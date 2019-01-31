@@ -20,6 +20,7 @@ public class MenuStage extends MyStage {
     private MyButton play;
     private MyButton about;
     private MyButton quit;
+    private MyButton challege;
 
     private OneSpriteStaticActor martin;
     private float martinStartX = 0;
@@ -40,8 +41,19 @@ public class MenuStage extends MyStage {
         martin.setPosition(martinStartX,0);
         addActor(martin);
 
+        challege = new MyButton("Challenge mode", game.getButtonStyle());
+        challege.setPosition(w / 2 - challege.getWidth() / 2, 400);
+        challege.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                super.clicked(event, x, y);
+                getGame().setScreen(new SkinScreen(getGame()));
+            }
+        });
+        addActor(challege);
+
         play = new MyButton("Játék", game.getButtonStyle());
-        play.setPosition(w / 2 - play.getWidth() / 2, 400);
+        play.setPosition(w / 2 - play.getWidth() / 2, 460);
         play.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
