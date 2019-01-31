@@ -47,7 +47,7 @@ public class MenuStage extends MyStage {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
-                getGame().setScreen(new SkinScreen(getGame()));
+                getGame().setScreen(new GameScreen(getGame(), Assets.CAR_1));
             }
         });
         addActor(challege);

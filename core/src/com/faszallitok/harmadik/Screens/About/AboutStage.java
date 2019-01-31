@@ -28,9 +28,9 @@ public class AboutStage extends MyStage {
         title.setFontScale(1.6f);
         addActor(title);
 
-        info = new MyLabel("A célod, hogy a szúnyog segítségével minél többet egyél,\nmert ha nem eszel akkor éhen hal a szúnyog\nVigyázz, mert Sanyi próbál közbe lecsapni téged!\nPróbáld meg kikerülni a többi akadályt is, mert meglepetésben lehet részed.\n\nKészítők: Fa Szállítók csapata", game.getLabelStyle());
+        info = new MyLabel("Az autót az ujjaddal tudod irányítani,\nígy kellaz úton maradnod,\nés az autókat kikerülnöd\n\nKészítők: A Fa Szállítók csapata", game.getLabelStyle());
         info.setAlignment(Align.center);
-        info.setPosition(getViewport().getWorldWidth() / 2 - info.getWidth() / 2, getViewport().getWorldHeight() - 390);
+        info.setPosition(getViewport().getWorldWidth() / 2 - info.getWidth() / 2, getViewport().getWorldHeight()/7);
         addActor(info);
 
         back = new MyButton("Menü", game.getButtonStyle());
