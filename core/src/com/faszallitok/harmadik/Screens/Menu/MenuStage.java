@@ -22,11 +22,16 @@ public class MenuStage extends MyStage {
     private MyButton quit;
     private MyButton challege;
 
+    OneSpriteStaticActor bg;
     private OneSpriteStaticActor martin;
     private OneSpriteStaticActor title;
     private float martinStartX = 0;
     float x;
     float y;
+
+    private OneSpriteStaticActor story1;
+    private OneSpriteStaticActor story2;
+    private OneSpriteStaticActor story3;
 
     public MenuStage(Batch batch, MyGdxGame game) {
         super(new ExtendViewport(576, 1024, new OrthographicCamera(576, 1024)), batch, game);
@@ -34,7 +39,7 @@ public class MenuStage extends MyStage {
         float w = getViewport().getWorldWidth();
         float h = getViewport().getWorldHeight();
 
-        OneSpriteStaticActor bg = new OneSpriteStaticActor(Assets.manager.get(Assets.MENU_BG));
+        bg = new OneSpriteStaticActor(Assets.manager.get(Assets.MENU_BG));
         bg.setSize(w, h);
         addActor(bg);
 
@@ -58,7 +63,8 @@ public class MenuStage extends MyStage {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
-                getGame().setScreen(new GameScreen(getGame(), Assets.METALCAR, true));
+                storymode();
+                //getGame().setScreen(new GameScreen(getGame(), Assets.METALCAR, true));
             }
         });
         addActor(challege);
@@ -95,10 +101,37 @@ public class MenuStage extends MyStage {
             }
         });
         addActor(quit);
+
+        //story
+        story1 = new OneSpriteStaticActor(Assets.manager.get(Assets.STORY1));
+        story1.setSize(w, h);
+        story1.setPosition(0-getViewport().getWorldWidth(),0);
+        addActor(story1);
+        story2 = new OneSpriteStaticActor(Assets.manager.get(Assets.STORY2));
+        story2.setSize(w, h);
+        story2.setPosition(0-getViewport().getWorldWidth(),0);
+        addActor(story2);
+        story3 = new OneSpriteStaticActor(Assets.manager.get(Assets.STORY4));
+        story3.setSize(w, h);
+        story3.setPosition(0-getViewport().getWorldWidth(),0);
+        addActor(story3);
     }
 
     private int animSpeed = 0;
     private float tick = 3;
+    int story = 0;
+    float count = 0-getViewport().getWorldWidth();
+
+    public void storymode(){
+        quit.setVisible(false);
+        about.setVisible(false);
+        play.setVisible(false);
+        challege.setVisible(false);
+        martin.setVisible(false);
+        title.setVisible(false);
+        bg.setVisible(false);
+        story = 1;
+    }
 
     @Override
     public void act(float delta) {
@@ -111,6 +144,37 @@ public class MenuStage extends MyStage {
         //if(Math.cos(tick) < 0.4f && Math.cos(tick) > -0.4f)
         martin.setX(martinStartX + ((float)Math.cos(tick) * 10) / 1);
         title.setY(y + ((float)Math.cos(tick) * 10) / 1);
+
+        //story
+        if(story!=0){
+            if(story==1){
+                count+=10;
+                story1.setX(count);
+                if (count >=0) {
+                    story = 2; count = 0-getViewport().getWorldWidth();
+                }
+            }
+            if(story==2){
+                count+=10;
+                story2.setX(count);
+                if (count >= 0) {
+                    story = 3; count = getViewport().getWorldWidth();
+                }
+            }
+            if(story==3){
+                count-=10;
+                story3.setX(count);
+                if (count <= 0) {
+                    story = 4; count = getViewport().getWorldWidth();
+                }
+            }
+            if(story==4){
+                count-=10;
+                if (count <= 0) {
+                    getGame().setScreen(new GameScreen(getGame(), Assets.METALCAR, true));
+                }
+            }
+        }
     }
 
     @Override

@@ -68,6 +68,12 @@ public class Assets {
 	public static final AssetDescriptor<Texture> ROAD_LEFT = new AssetDescriptor<Texture>("roads/left.png", Texture.class);
 	public static final AssetDescriptor<Texture> ROAD_RIGHT = new AssetDescriptor<Texture>("roads/right.png", Texture.class);
 
+	//story
+	public static final AssetDescriptor<Texture> STORY1 = new AssetDescriptor<Texture>("Textures/story1.png", Texture.class);
+	public static final AssetDescriptor<Texture> STORY2 = new AssetDescriptor<Texture>("Textures/story2.png", Texture.class);
+	public static final AssetDescriptor<Texture> STORY3 = new AssetDescriptor<Texture>("Textures/story3.png", Texture.class);
+	public static final AssetDescriptor<Texture> STORY4 = new AssetDescriptor<Texture>("Textures/story4.png", Texture.class);
+
 	//Car
 	public static final AssetDescriptor<Texture> CAR_1 = new AssetDescriptor<Texture>("cars/car1.png", Texture.class);
 	public static final AssetDescriptor<Texture> CAR_2 = new AssetDescriptor<Texture>("cars/car2.png", Texture.class);
@@ -168,6 +174,11 @@ public class Assets {
 		manager.load(CAR_14);
 		manager.load(CAR_15);
 		manager.load(METALCAR);
+
+		manager.load(STORY1);
+		manager.load(STORY2);
+		manager.load(STORY3);
+		manager.load(STORY4);
 
 		manager.load(RED);
 		manager.load(MENU_ICON);
